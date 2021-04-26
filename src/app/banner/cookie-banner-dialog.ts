@@ -1,32 +1,30 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-// import { select, Store } from '@ngrx/store';
-// import { Observable } from 'rxjs';
-//
-// import { getGameById, setGameDetail } from '../../actions/game.actions';
-// import { Game } from '../../models/game';
-// import { GameState } from '../../reducers/game.reducer';
-// import { selectCurrentGameDetail } from '../../selectors/game.selectors';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { getBanners } from '../actions/banner.actions';
+import { Accordian } from '../models/banner';
+import { BannerState } from '../reducers/banner.reducer';
+import { selectBannerList } from '../selectors/banner.selectors';
 
 @Component({
     selector: 'cookie-banner-dialog',
     templateUrl: 'cookie-banner-dialog.html',
 })
 export class CookieBannerDialog implements OnInit {
-    // public gameDetail$: Observable<Game> = this.store.pipe(select(selectCurrentGameDetail));;
+  public bannerList$: Observable<Accordian[]> = this.store.pipe(select(selectBannerList));
 
-    constructor(
-        // private store: Store<GameState>,
-        private dialogRef: MatDialogRef<CookieBannerDialog>,
-        @Inject(MAT_DIALOG_DATA) public data
-    ) {}
+  constructor(
+      private store: Store<BannerState>,
+      private dialogRef: MatDialogRef<CookieBannerDialog>,
+      @Inject(MAT_DIALOG_DATA) public data
+  ) {}
 
-    ngOnInit() {
-        // this.store.dispatch(setGameDetail({ gameDetail: null }));
-        // this.store.dispatch(getGameById({ gameId: this.data.gameId }));
-    }
+  ngOnInit() {
+    this.store.dispatch(getBanners());
+  }
 
-    onNoClick(): void {
-        this.dialogRef.close();
-    }
+  onNoClick(): void {
+      this.dialogRef.close();
+  }
 }
