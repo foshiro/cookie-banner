@@ -2,17 +2,19 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getBanners } from '../actions/banner.actions';
-import { Accordian } from '../models/banner';
-import { BannerState } from '../reducers/banner.reducer';
-import { selectBannerList } from '../selectors/banner.selectors';
+import { getBanners } from '../../actions/banner.actions';
+import { Accordian } from '../../models/banner';
+import { BannerState } from '../../reducers/banner.reducer';
+import { selectBannerList } from '../../selectors/banner.selectors';
 
 @Component({
     selector: 'cookie-banner-dialog',
     templateUrl: 'cookie-banner-dialog.html',
+    styleUrls: ['./cookie-banner-dialog.scss']
 })
 export class CookieBannerDialog implements OnInit {
   public bannerList$: Observable<Accordian[]> = this.store.pipe(select(selectBannerList));
+  public panelOpenState = false;
 
   constructor(
       private store: Store<BannerState>,

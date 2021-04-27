@@ -1,0 +1,46 @@
+<div class="banner-dialog">
+  <h1 mat-dialog-title>Can we store cookies?</h1>
+
+  <mat-dialog-content class="mat-typography">
+    <p>
+      We and our partners use technologies, such as cookies, and process personal data, such as IP addresses and cookie
+      identifiers, to personalize ads and content based on your interests, measure the performance of ads and content,
+      and derive insights about the audience who saw ads and content.
+    </p>
+    <p>
+      Click below to consent to the use of this technology and the processing of your personal data for these purposes. You
+      can change your mind and change your consent choices at any time by returning to this site.
+    </p>
+    <p>
+      You can familiarize with our <b><u>Privacy Policy</u></b>
+    </p>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button color="success" class="btn btn-success">Accept All</button>
+    <button mat-button class="btn btn-outline-secondary">Save Settings</button>
+    <div class="float-right">Customize</div>
+  </mat-dialog-actions>
+
+  <mat-accordion multi>
+    <mat-expansion-panel *ngFor="let banner of (bannerList$ | async)" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{banner.CategoyHeading}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <p>{{banner.CategoyText}}</p>
+      <div class="row">
+        <div class="col-md-4"><b>Plugins</b></div>
+        <div class="col-md-4"><b>Block/Enable</b></div>
+        <div class="col-md-4"><b></b></div>
+      </div>
+      <div *ngFor="let plugin of banner.PluginList" class="row">
+        <div class="col-md-4">{{plugin.ComplianceType}}</div>
+        <div class="col-md-4">
+          <mat-slide-toggle color="accent" checked="{{plugin.BlockingEnabled}}"></mat-slide-toggle>
+        </div>
+        <div class="col-md-4"><a [href]="plugin.PluginDomain" target="_blank">Go to site</a></div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
