@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { CookieBannerDialog } from './banner/cookie-banner-dialog';
+import { CookieBannerDialog } from './components/banner-dialog/cookie-banner-dialog';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,6 @@ export class AppComponent {
   title = 'cookie-banner';
 
   openBanners() {
-    this.dialog.open(CookieBannerDialog, { width: '30%' });
+    this.dialog.open(CookieBannerDialog, { width: '30%', maxHeight: '90vh' });
   }
 }
